@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @Slf4j
 public class WebApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(WebApplication.class, args);
 	}
