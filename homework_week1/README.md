@@ -20,7 +20,12 @@
 + 임성근
 + 조영우
 + 이준상
+
 - - - 
+**20조**
++ 김노은
+
+- - -
 
 ## 방법
 1. 각 조 조장은 Robinkim0182/spring-web repository 를 fork 딴 후, write 권한을 받아간다.
