@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span>게시판 입니다</span>
+    <div>
+        <h1 th:text="${board.title}">제목이 나올 곳 입니다</h1>
+        <p th:text="${board.content}">내용이 나올 영역 입니다</p>
+    </div>
+</body>
+</html>
