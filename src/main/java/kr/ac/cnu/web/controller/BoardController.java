@@ -1,10 +1,14 @@
 package kr.ac.cnu.web.controller;
 
 import kr.ac.cnu.web.model.Board;
+import kr.ac.cnu.web.repository.BoardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,15 +18,13 @@ import java.util.List;
  */
 @Controller
 public class BoardController {
-    private List<Board> boards = Arrays.asList(
-            new Board(1, "제목1", "1번 게시물의 내용입니다.", "ian"),
-            new Board(2, "제목2", "2번 이에요", "ian"),
-            new Board(3, "제목3", "3번?", "ian"),
-            new Board(4, "제목4", "4444", "ian")
-    );
+    @Autowired
+    private BoardRepository boardRepository;
+
 
     @GetMapping("/boards")
     public String getBoards(Model model) {
+        List<Board> boards = boardRepository.findAll();
         model.addAttribute("boards", boards);
 
         return "boards";
@@ -30,17 +32,22 @@ public class BoardController {
 
     @GetMapping("/boards/{id}")
     public String getBoard(@PathVariable long id, Model model) {
-        Board findOne = null;
-
-        for (Board board : boards) {
-            if (board.getId() == id) {
-                findOne = board;
-                break;
-            }
-        }
-
-        model.addAttribute("board", findOne);
+        Board board = boardRepository.findById(id).get();
+        model.addAttribute("board", board);
 
         return "board";
+    }
+
+    @PostMapping("/boards")
+    public void addBoard(
+            @RequestParam String title,
+            @RequestParam String content,
+            @RequestParam String writerId) {
+        Board board = new Board();
+        board.setTitle(title);
+        board.setContent(content);
+        board.setWriterId(writerId);
+
+        boardRepository.save(board);
     }
 }
