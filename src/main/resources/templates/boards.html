@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span>게시판 입니다</span>
+    <div>
+        <ul>
+            <a th:each="board : ${boards}" th:href="@{'/boards/' + ${board.id}}" >
+                <li th:text="${board.title}"></li>
+            </a>
+        </ul>
+    </div>
+</body>
+</html>
