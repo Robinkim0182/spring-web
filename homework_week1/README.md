@@ -42,6 +42,11 @@
 + 오은진
 + 조민석
 
+---
+**4조**
++ 서유경
+
+
 1. 각 조 조장은 Robinkim0182/spring-web repository 를 fork 딴 후, write 권한을 받아간다.
 2. 자신이 속한 조에 자기의 이름을 입력하여 commit 하고, 조장은 해당 commit 을 모아 master branch 에 Pull request -> Merge 를 수행한다.
 3. 최종 결과물에는 각 조의 조원이름이 모두 포함되어 있어야 한다.
