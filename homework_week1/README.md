@@ -53,6 +53,7 @@
 **7조**
 + 한선규
 + 정성철
++ 정유진
 
 1. 각 조 조장은 Robinkim0182/spring-web repository 를 fork 딴 후, write 권한을 받아간다.
 2. 자신이 속한 조에 자기의 이름을 입력하여 commit 하고, 조장은 해당 commit 을 모아 master branch 에 Pull request -> Merge 를 수행한다.
