@@ -122,6 +122,7 @@
 + 김성민
 + 이수정
 + 손예지
++ 이승재
 
 ## 방법
 1. 각 조 조장은 Robinkim0182/spring-web repository 를 fork 딴 후, write 권한을 받아간다.
