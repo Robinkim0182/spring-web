@@ -106,7 +106,7 @@
 - - -
 **18조**
 + 박근우
-+ 이예은
++ 이예은    
 
 ## 방법
 1. 각 조 조장은 Robinkim0182/spring-web repository 를 fork 딴 후, write 권한을 받아간다.
