@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span>식단 목록 입니다.</span>
+    <div>
+        <ul>
+            <a th:each="todayMenu : ${todayMenus}" th:href="@{'/menus/' + ${menu.today}}" >
+                <li th:text="${menu.today}"></li>
+            </a>
+        </ul>
+    </div>
+</body>
+</html>
