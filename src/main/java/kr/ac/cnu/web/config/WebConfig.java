@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by rokim on 2018. 5. 21..
  */
-//@Configuration
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
