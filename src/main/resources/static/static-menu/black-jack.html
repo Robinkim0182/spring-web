@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <span id="name"></span>
+        <span id="myMoney"></span>
+        <span id="betMoney"></span>
+        <span id="myHands"></span>
+        <span id="myScore"></span>
+        <span id="result"></span>
+        <button type="button" onclick="action()">ADD</button>
+    </div>
+</body>
+<script src="../jquery-3.3.1.min.js"></script>
+
+<script>
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/black-jack"
+    }).done(function( data ) {
+        console.log(data);
+    });
+
+    function action() {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/black-jack",
+            data: JSON.stringify({
+                action : 'HIT'
+            }),
+            contentType:"application/json;",
+        }).done(function( data ) {
+            console.log(data);
+        });
+    }
+</script>
+
+</html>

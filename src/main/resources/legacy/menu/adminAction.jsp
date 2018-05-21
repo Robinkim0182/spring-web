@@ -7,7 +7,7 @@
     // 파라미터
     String today = request.getParameter("today");
     String meal = request.getParameter("meal");
-    String menu = request.getParameter("menu");
+    String menu = request.getParameter("menuName");
     try {
         Class.forName("com.mysql.jdbc.Driver");
         conn = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
     alert('OK');
-    document.location.href="/menu/admin.jsp";
+    document.location.href="/static-menu/admin.jsp";
 </script>
 <body>
 </body>

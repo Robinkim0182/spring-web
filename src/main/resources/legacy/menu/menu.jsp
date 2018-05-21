@@ -22,11 +22,11 @@
 
         while(rs.next()) {
             if (rs.getString("meal").equals("breakfast")) {
-                breakfast.add(rs.getString("menu"));
+                breakfast.add(rs.getString("menuName"));
             } else if (rs.getString("meal").equals("breakfast")) {
-                launch.add(rs.getString("menu"));
+                launch.add(rs.getString("menuName"));
             } else if (rs.getString("meal").equals("dinner")) {
-                dinner.add(rs.getString("menu"));
+                dinner.add(rs.getString("menuName"));
             }
         }
 %>
