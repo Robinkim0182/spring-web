@@ -30,42 +30,42 @@ public class MenuController {
         return "/menu/insert";
     }
 
-//    @PostMapping("/menus")
-//    public String insetAction(@RequestParam String today,
-//                              @RequestParam Meal meal,
-//                              @RequestParam String menuName) {
-//        Menu menu = new Menu();
-//        menu.setToday(today);
-//        menu.setMeal(meal);
-//        menu.setMenuName(menuName);
-//
-//        menuRepository.save(menu);
-//
-//        return "redirect:/menus/" + today;
-//    }
+    @PostMapping("/menus")
+    public String insetAction(@RequestParam String today,
+                              @RequestParam Meal meal,
+                              @RequestParam String menuName) {
+        Menu menu = new Menu();
+        menu.setToday(today);
+        menu.setMeal(meal);
+        menu.setMenuName(menuName);
 
-//    @GetMapping("/menus/{today}")
-//    public String menu(@PathVariable String today, Model model) {
-//        List<Menu> menuList = menuRepository.findAllByToday(today);
-//        List<String> breakfastList = new ArrayList<>();
-//        List<String> launchList = new ArrayList<>();
-//        List<String> dinnerList = new ArrayList<>();
-//        for (Menu menu : menuList) {
-//            if (menu.getMeal() == Meal.BREAKFAST) {
-//                breakfastList.add(menu.getMenuName());
-//            } else if (menu.getMeal() == Meal.LAUNCH) {
-//                launchList.add(menu.getMenuName());
-//            } else if (menu.getMeal() == Meal.DINNER) {
-//                dinnerList.add(menu.getMenuName());
-//            }
-//        }
-//        TodayMenu todayMenu = new TodayMenu();
-//        todayMenu.setToday(today);
-//        todayMenu.setBreakfastList(breakfastList);
-//        todayMenu.setLaunchList(launchList);
-//        todayMenu.setDinnerList(dinnerList);
-//
-//        model.addAttribute("todayMenu", todayMenu);
-//        return "/menu/menu";
-//    }
+        menuRepository.save(menu);
+
+        return "redirect:/menus/" + today;
+    }
+
+    @GetMapping("/menus/{today}")
+    public String menu(@PathVariable String today, Model model) {
+        List<Menu> menuList = menuRepository.findAllByToday(today);
+        List<String> breakfastList = new ArrayList<>();
+        List<String> launchList = new ArrayList<>();
+        List<String> dinnerList = new ArrayList<>();
+        for (Menu menu : menuList) {
+            if (menu.getMeal() == Meal.BREAKFAST) {
+                breakfastList.add(menu.getMenuName());
+            } else if (menu.getMeal() == Meal.LAUNCH) {
+                launchList.add(menu.getMenuName());
+            } else if (menu.getMeal() == Meal.DINNER) {
+                dinnerList.add(menu.getMenuName());
+            }
+        }
+        TodayMenu todayMenu = new TodayMenu();
+        todayMenu.setToday(today);
+        todayMenu.setBreakfastList(breakfastList);
+        todayMenu.setLaunchList(launchList);
+        todayMenu.setDinnerList(dinnerList);
+
+        model.addAttribute("todayMenu", todayMenu);
+        return "/menu/menu";
+    }
 }
