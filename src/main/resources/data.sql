@@ -11,7 +11,6 @@ VALUES (
   '제목입니다.3', '내용입니다.', 'ian'
 );
 
-/*
 insert into menu (today, meal, menu_name)
 values ('0501', 'BREAKFAST', '콩밥');
 insert into menu (today, meal, menu_name)
@@ -44,4 +43,3 @@ insert into menu (today, meal, menu_name)
 values ('0501', 'DINNER', '갈치구이');
 insert into menu (today, meal, menu_name)
 values ('0501', 'DINNER', '무나물');
-*/
