@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {border-collapse: collapse; width: 800px;}
+        table th, td {border: 1px solid black; padding: 0px; text-align: center;}
+    </style>
+
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>날짜</th>
+            <th>아침</th>
+            <th>점심</th>
+            <th>저녁</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${todayMenu.today}"></td>
+            <td>
+                <ul>
+                    <li th:each="breakfast : ${todayMenu.breakfastList}" th:text="${breakfast}">아침 메뉴</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="launch : ${todayMenu.launchList}" th:text="${launch}">점심 메뉴</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="dinner : ${todayMenu.dinnerList}" th:text="${dinner}">저녁 메뉴</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
