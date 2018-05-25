@@ -24,10 +24,10 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build()
-                .produces(new HashSet<>(Arrays.asList(
-                        MediaType.APPLICATION_JSON_VALUE,
-                        MediaType.APPLICATION_XML_VALUE
-                )));
+                .build();
+//                .produces(new HashSet<>(Arrays.asList(
+//                        MediaType.APPLICATION_JSON_VALUE,
+//                        MediaType.APPLICATION_XML_VALUE
+//                )));
     }
 }

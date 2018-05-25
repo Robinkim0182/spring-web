@@ -1,3 +1,9 @@
 spring:
   thymeleaf:
     cache: false
+
+application:
+  mybatis:
+    config-location: classpath:mybatis/mybatis-config.xml
+    mapper-locations: classpath:mybatis/mapper/menuMapper.xml
+    type-aliases-package: kr.ac.cnu.web.model
