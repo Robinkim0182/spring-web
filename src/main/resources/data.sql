@@ -45,4 +45,4 @@ insert into menu (today, meal, menu_name)
 values ('0501', 'DINNER', '무나물');
 
 insert into user (name, account) values ('Robin', 1000000);
-insert into user (name, account) values ('Ian', 500);
+insert into user (name, account) values ('Ian', 3000);

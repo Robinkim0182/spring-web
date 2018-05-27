@@ -1,15 +1,19 @@
 package kr.ac.cnu.web.controller.api;
 
 import kr.ac.cnu.web.exceptions.NoLoginException;
+import kr.ac.cnu.web.exceptions.NoUserException;
 import kr.ac.cnu.web.games.blackjack.GameRoom;
 import kr.ac.cnu.web.model.User;
+import kr.ac.cnu.web.repository.UserRepository;
 import kr.ac.cnu.web.service.BlackjackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,47 +25,42 @@ import java.awt.*;
  */
 @RestController
 @RequestMapping("/api/black-jack")
+@CrossOrigin
 public class BlackApiController {
     @Autowired
     private BlackjackService blackjackService;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User login(HttpSession httpSession, @RequestBody String name) {
-        User user = new User(name, 100000L);
-        httpSession.setAttribute("user", user);
-
-        return user;
-    }
-
-    @PostMapping("/logout")
-    public void logout(HttpSession httpSession) {
-        httpSession.removeAttribute("user");
+    public User login(@RequestBody String name) {
+        return userRepository.findById(name).orElseThrow(() -> new NoUserException());
     }
 
     @PostMapping("/rooms")
-    public GameRoom createRoom(HttpSession httpSession) {
-        User user = this.getUserFromSession(httpSession);
+    public GameRoom createRoom(@RequestHeader("name") String name) {
+        User user = this.getUserFromSession(name);
 
         return blackjackService.createGameRoom(user);
     }
 
     @PostMapping(value = "/rooms/{roomId}/bet", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GameRoom bet(HttpSession httpSession, @PathVariable String roomId, @RequestBody long betMoney) {
-        User user = this.getUserFromSession(httpSession);
+    public GameRoom bet(@RequestHeader("name") String name, @PathVariable String roomId, @RequestBody long betMoney) {
+        User user = this.getUserFromSession(name);
 
         return blackjackService.bet(roomId, user, betMoney);
     }
 
     @PostMapping("/rooms/{roomId}/hit")
-    public GameRoom hit(HttpSession httpSession, @PathVariable String roomId) {
-        User user = this.getUserFromSession(httpSession);
+    public GameRoom hit(@RequestHeader("name") String name, @PathVariable String roomId) {
+        User user = this.getUserFromSession(name);
 
         return blackjackService.hit(roomId, user);
     }
 
     @PostMapping("/rooms/{roomId}/stand")
-    public GameRoom stand(HttpSession httpSession, @PathVariable String roomId) {
-        User user = this.getUserFromSession(httpSession);
+    public GameRoom stand(@RequestHeader("name") String name, @PathVariable String roomId) {
+        User user = this.getUserFromSession(name);
 
         return blackjackService.stand(roomId, user);
     }
@@ -72,11 +71,7 @@ public class BlackApiController {
     }
 
 
-    private User getUserFromSession(HttpSession httpSession) {
-        if (httpSession.getAttribute("user") == null) {
-            throw new NoLoginException();
-        }
-
-        return (User) httpSession.getAttribute("user");
+    private User getUserFromSession(String name) {
+        return userRepository.findById(name).orElseThrow(() -> new NoLoginException());
     }
 }

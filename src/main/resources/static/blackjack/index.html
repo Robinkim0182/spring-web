@@ -461,7 +461,10 @@
     $('#create_room_button').click(function() {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/api/black-jack/rooms'
+            url: 'http://localhost:8080/api/black-jack/rooms',
+            headers: {
+                'name':user.name
+            }
         }).done(function(data) {
             $('#login').hide();
             $('#lobby').hide();
@@ -477,6 +480,9 @@
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/bet',
+            headers: {
+                'name':user.name
+            },
             data: JSON.stringify(bet),
             contentType:'application/json;',
         }).done(function(data) {
@@ -488,6 +494,9 @@
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/hit',
+            headers: {
+                'name':user.name
+            },
         }).done(function(data) {
             drawGameRoom(data);
         });
@@ -497,6 +506,9 @@
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/stand',
+            headers: {
+                'name':user.name
+            },
         }).done(function(data) {
             drawGameRoom(data);
         });
