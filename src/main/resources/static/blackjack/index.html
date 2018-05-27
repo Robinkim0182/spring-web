@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <style>
+        /* Reset */
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+
+            margin:0;
+
+            padding:0;
+
+            border:0;
+
+            font-size:100%;
+
+            vertical-align:baseline;
+
+        }
+
+        h1{
+            font-size:35px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        h2{
+            font-size:30px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+
+        p{
+            font-size:20px;
+            line-height: 40px;
+        }
+
+        a{
+            text-decoration: none;
+            color: #06C;
+        }
+
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            font-size: 15px;
+            line-height: 40px;
+            background-color: #FFFFFF;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .page{
+            width: auto;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 500px;
+            text-align: center;
+        }
+
+        .dealer-cards .card, .player-cards .card {
+            margin-left: 5px;
+        }
+
+        .dealer-cards .card:first-child, .player-cards .card:first-child{
+            margin-left: 0;
+        }
+
+        .new-cards .card:first-child{
+            margin-left: 5px;
+        }
+
+        .dealer-cards, .player-cards{
+            padding-top: 50px;
+            /*width: 164px;*/
+            margin: 0 auto;
+            display: inline-block;
+        }
+
+        .dealer-total, .player-total{
+            margin-top: 10px;
+        }
+
+        .buttons{
+            width: 210px;
+            margin: 20px auto 0 auto;
+        }
+
+        .flipped{
+            background-position: -158px -492px !important;
+        }
+
+
+        .btn {
+            font: bold 13px "Helvetica Neue", Helvetica, Arial, clean, sans-serif !important;
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25);
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            display: inline-block;
+            color: white;
+            white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
+            background-color: #A9014B;
+            border-style: none;
+            text-align: center;
+            overflow: visible;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            padding-top: 10px;
+            height: 40px;
+            width: 100px;
+            -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+            box-sizing: border-box;         /* Opera/IE 8+ */
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background-position: 0 -50px;
+            color: white;
+            background-color: #c90059;
+        }
+
+        .btn:active {
+            background-color: #7c0d3e;
+            -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7);
+            -webkit-box-shadow: none;
+        }
+
+        .card {
+            background-image: url(./cards.png);
+            float: left;
+            height: 123px;
+            width: 79px;
+        }
+
+        .message{
+            font-size: 25px;
+            margin-top: 30px;
+            height: 60px;
+        }
+
+        /*.dealer-total{*/
+            /*visibility: hidden;*/
+        /*}*/
+
+
+        /* Clubs */
+        .ace-of-clubs{
+            background-position: 0 0;
+        }
+
+        .two-of-clubs{
+            background-position: -79px 0;
+        }
+
+        .three-of-clubs{
+            background-position: -158px 0;
+        }
+
+        .four-of-clubs{
+            background-position: -237px 0;
+        }
+
+        .five-of-clubs{
+            background-position: -316px 0;
+        }
+
+        .six-of-clubs{
+            background-position: -395px 0;
+        }
+
+        .seven-of-clubs{
+            background-position: -474px 0;
+        }
+
+        .eight-of-clubs{
+            background-position: -553px 0;
+        }
+
+        .nine-of-clubs{
+            background-position: -632px 0;
+        }
+
+        .ten-of-clubs{
+            background-position: -711px 0;
+        }
+
+        .jack-of-clubs{
+            background-position: -790px 0;
+        }
+
+        .queen-of-clubs{
+            background-position: -869px 0;
+        }
+
+        .king-of-clubs{
+            background-position: -948px 0;
+        }
+
+
+
+
+        /* Spades */
+        .ace-of-spades{
+            background-position: 0 -123px;
+        }
+
+        .two-of-spades{
+            background-position: -79px -123px;
+        }
+
+        .three-of-spades{
+            background-position: -158px -123px;
+        }
+
+        .four-of-spades{
+            background-position: -237px -123px;
+        }
+
+        .five-of-spades{
+            background-position: -316px -123px;
+        }
+
+        .six-of-spades{
+            background-position: -395px -123px;
+        }
+
+        .seven-of-spades{
+            background-position: -474px -123px;
+        }
+
+        .eight-of-spades{
+            background-position: -553px -123px;
+        }
+
+        .nine-of-spades{
+            background-position: -632px -123px;
+        }
+
+        .ten-of-spades{
+            background-position: -711px -123px;
+        }
+
+        .jack-of-spades{
+            background-position: -790px -123px;
+        }
+
+        .queen-of-spades{
+            background-position: -869px -123px;
+        }
+
+        .king-of-spades{
+            background-position: -948px -123px;
+        }
+
+
+
+        /* Hearts */
+        .ace-of-hearts{
+            background-position: 0 -246px;
+        }
+
+        .two-of-hearts{
+            background-position: -79px -246px;
+        }
+
+        .three-of-hearts{
+            background-position: -158px -246px;
+        }
+
+        .four-of-hearts{
+            background-position: -237px -246px;
+        }
+
+        .five-of-hearts{
+            background-position: -316px -246px;
+        }
+
+        .six-of-hearts{
+            background-position: -395px -246px;
+        }
+
+        .seven-of-hearts{
+            background-position: -474px -246px;
+        }
+
+        .eight-of-hearts{
+            background-position: -553px -246px;
+        }
+
+        .nine-of-hearts{
+            background-position: -632px -246px;
+        }
+
+        .ten-of-hearts{
+            background-position: -711px -246px;
+        }
+
+        .jack-of-hearts{
+            background-position: -790px -246px;
+        }
+
+        .queen-of-hearts{
+            background-position: -869px -246px;
+        }
+
+        .king-of-hearts{
+            background-position: -948px -246px;
+        }
+
+
+        /* Diamonds */
+        .ace-of-diamonds{
+            background-position: 0 -369px;
+        }
+
+        .two-of-diamonds{
+            background-position: -79px -369px;
+        }
+
+        .three-of-diamonds{
+            background-position: -158px -369px;
+        }
+
+        .four-of-diamonds{
+            background-position: -237px -369px;
+        }
+
+        .five-of-diamonds{
+            background-position: -316px -369px;
+        }
+
+        .six-of-diamonds{
+            background-position: -395px -369px;
+        }
+
+        .seven-of-diamonds{
+            background-position: -474px -369px;
+        }
+
+        .eight-of-diamonds{
+            background-position: -553px -369px;
+        }
+
+        .nine-of-diamonds{
+            background-position: -632px -369px;
+        }
+
+        .ten-of-diamonds{
+            background-position: -711px -369px;
+        }
+
+        .jack-of-diamonds{
+            background-position: -790px -369px;
+        }
+
+        .queen-of-diamonds{
+            background-position: -869px -369px;
+        }
+
+        .king-of-diamonds{
+            background-position: -948px -369px;
+        }
+
+        .bet{
+            width: 50px;
+            margin: 0 auto;
+            height: 40px;
+        }
+
+        .betting-area{
+            width: 70px;
+            margin: 30px auto 30px auto;
+        }
+
+        .betting-area #more{
+            float: left;
+            width: 30px;
+        }
+
+        .betting-area #less{
+            float: left;
+            width: 30px;
+        }
+
+        .money{
+            color: green;
+            font-size: 21px;
+        }
+    </style>
+</head>
+<body>
+<div class="page" id="login">
+    <div>
+        <input type="text" id="input_login_name" />
+        <div class="buttons"><div class="btn" id="login_button">Login</div></div>
+    </div>
+</div>
+<div class="page" id="lobby" style="display: none">
+    <div>
+        <div class="buttons"><div class="btn" id="create_room_button">Create</div></div>
+    </div>
+</div>
+<div class="page" id="game" style="display: none">
+    <div class="dealer-cards"></div>
+    <div class="clear"></div>
+    <div class="player-cards"></div>
+    <div class="buttons"><div class="btn" id="hit">Hit</div><div class="btn" id="stand">Stand</div></div>
+    <div class="buttons"><div class="btn" id="deal">Deal</div></div>
+    <div class="betting-area">
+        <b>Your Bet</b><br>
+        <div id="bet" class="bet money">0</div>
+        <div>
+            <div class="btn" id="more">+</div>
+            <div class="btn" id="less">-</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div>
+        <b>Available Funds</b><br>
+        <span id="money" class="money"></span>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+<script src="./jquery-3.3.1.min.js"></script>
+
+<script>
+    var user;
+    var gameRoomId;
+
+    $('#login_button').click(function() {
+        var loginName = $('#input_login_name').val();
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/black-jack/login',
+            data: loginName,
+            contentType:'application/json;'
+        }).done(function(data) {
+            $('#login').hide();
+            $('#lobby').show();
+            user = data;
+        });
+    });
+
+    $('#create_room_button').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/black-jack/rooms'
+        }).done(function(data) {
+            $('#login').hide();
+            $('#lobby').hide();
+            $('#game').show();
+            gameRoomId = data.roomId;
+            drawGameRoom(data);
+        });
+    })
+
+    $('#deal').click(function() {
+        var bet = parseInt($('#bet').html());
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/bet',
+            data: JSON.stringify(bet),
+            contentType:'application/json;',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+    $('#hit').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/hit',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+    $('#stand').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/stand',
+        }).done(function(data) {
+            drawGameRoom(data);
+        });
+    })
+
+    $('#more').click(function(){
+        var bet = 100;
+        var currentBet = parseInt($('#bet').html());
+        var money = parseInt($('#money').html());
+        if (money < bet) {
+            bet = money;
+        }
+
+        $('#bet').html(currentBet + bet);
+        $('#money').html(money - bet);
+    });
+
+    $('#less').click(function(){
+        var bet = 100;
+        var currentBet = parseInt($('#bet').html());
+        var money = parseInt($('#money').html());
+        if(currentBet < bet) {
+            bet = currentBet;
+        }
+
+        $('#bet').html(currentBet - bet);
+        $('#money').html(money + bet);
+    });
+
+    function drawGameRoom(gameRoom) {
+        console.log(gameRoom);
+        if (gameRoom.finished) {
+            $('#deal').show();
+            $('#more').show();
+            $('#less').show();
+            $('#hit').hide();
+            $('#stand').hide();
+        } else {
+            $('#deal').hide();
+            $('#more').hide();
+            $('#less').hide();
+            $('#hit').show();
+            $('#stand').show();
+        }
+
+        $('.dealer-cards').html("");
+        gameRoom.dealer.hand.cardList.forEach(function(card) {
+            $('.dealer-cards').append(generateCardDiv(card.rank, card.suit));
+        })
+        if (gameRoom.dealer.hand.cardList.length == 1) {
+            $('.dealer-cards').append('<div class="card card2 flipped" data-value="6"></div>');
+        }
+        if (gameRoom.dealer.hand.cardList.length > 0) {
+            $('.dealer-cards').append('<div id="dealerTotal" class="dealer-total">' + gameRoom.dealer.hand.cardSum + '</div>')
+        }
+
+        $('.player-cards').html("");
+        gameRoom.playerList[user.name].hand.cardList.forEach(function(card) {
+            $('.player-cards').append(generateCardDiv(card.rank, card.suit));
+        });
+        if (gameRoom.playerList[user.name].hand.cardList.length > 0) {
+            $('.player-cards').append('<div id="playerTotal" class="player-total">' + gameRoom.playerList[user.name].hand.cardSum + '</div>')
+        }
+
+        $('#bet').html(gameRoom.playerList[user.name].currentBet);
+        $('#money').html(gameRoom.playerList[user.name].balance);
+    }
+
+    function generateCardDiv(rank, suit) {
+        var className = "";
+        switch (rank) {
+            case 1 :
+                className = "ace-of-";
+                break;
+            case 2:
+                className = "two-of-";
+                break;
+            case 3 :
+                className = "three-of-";
+                break;
+            case 4 :
+                className = "four-of-";
+                break;
+            case 5 :
+                className = "five-of-";
+                break;
+            case 6 :
+                className = "six-of-";
+                break;
+            case 7 :
+                className = "seven-of-";
+                break;
+            case 8 :
+                className = "eight-of-";
+                break;
+            case 9 :
+                className = "nine-of-";
+                break;
+            case 10 :
+                className = "ten-of-";
+                break;
+            case 11 :
+                className = "jack-of-";
+                break;
+            case 12 :
+                className = "queen-of-";
+                break;
+            case 13 :
+                className = "king-of-";
+                break;
+        }
+        className += suit.toLowerCase();
+
+        return "<div class='card " + className + "' data-value='" + rank +"'></div>";
+    }
+</script>
+
+</html>

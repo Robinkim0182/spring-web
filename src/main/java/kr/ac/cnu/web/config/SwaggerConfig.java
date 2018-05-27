@@ -1,5 +1,6 @@
 package kr.ac.cnu.web.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -23,7 +24,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
+                .paths(Predicates.or(PathSelectors.ant("/api/**")))
                 .build();
 //                .produces(new HashSet<>(Arrays.asList(
 //                        MediaType.APPLICATION_JSON_VALUE,
