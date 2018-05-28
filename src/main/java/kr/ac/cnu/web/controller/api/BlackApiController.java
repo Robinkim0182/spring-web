@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.awt.*;
+import java.util.Optional;
 
 /**
  * Created by rokim on 2018. 5. 21..
@@ -36,6 +37,25 @@ public class BlackApiController {
     public User login(@RequestBody String name) {
         return userRepository.findById(name).orElseThrow(() -> new NoUserException());
     }
+
+    @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User singup(@RequestBody String name) {
+        // TODO check already used name
+        Optional<User> userOptional = userRepository.findById(name);
+        if (userOptional.isPresent()) {
+            throw new RuntimeException();
+        }
+
+        // TODO new user
+        User user = new User(name, 50000);
+
+        // TODO save in repository
+        return userRepository.save(user);
+    }
+
+
+
+
 
     @PostMapping("/rooms")
     public GameRoom createRoom(@RequestHeader("name") String name) {
