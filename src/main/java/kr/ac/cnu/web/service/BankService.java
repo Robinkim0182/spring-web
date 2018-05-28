@@ -5,6 +5,7 @@ import kr.ac.cnu.web.repository.UserRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by rokim on 2018. 5. 25..
@@ -16,8 +17,8 @@ public class BankService {
     private UserRepository userRepository;
 
     public User transferMoney(String fromUserName, String toUserName, long money) {
-        User from = userRepository.findById(fromUserName).get();
-        User to = userRepository.findById(toUserName).get();
+        User from = userRepository.findById(fromUserName).orElse(new User());
+        User to = userRepository.findById(toUserName).orElse(new User());
 
 
         from.setAccount(from.getAccount() - money);
