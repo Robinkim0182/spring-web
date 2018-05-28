@@ -1,5 +1,6 @@
 package kr.ac.cnu.web.service;
 
+import kr.ac.cnu.web.aspect.TimeLogger;
 import kr.ac.cnu.web.model.User;
 import kr.ac.cnu.web.repository.UserRepository;
 import lombok.Setter;
