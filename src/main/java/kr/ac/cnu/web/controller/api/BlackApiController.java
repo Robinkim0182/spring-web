@@ -1,5 +1,6 @@
 package kr.ac.cnu.web.controller.api;
 
+import kr.ac.cnu.web.exceptions.DuplicateUserException;
 import kr.ac.cnu.web.exceptions.NoLoginException;
 import kr.ac.cnu.web.exceptions.NoUserException;
 import kr.ac.cnu.web.games.blackjack.GameRoom;
@@ -35,6 +36,16 @@ public class BlackApiController {
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public User login(@RequestBody String name) {
         return userRepository.findById(name).orElseThrow(() -> new NoUserException());
+    }
+
+    @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User users(@RequestBody String name) {
+        if (userRepository.findById(name).isPresent()) {
+            throw new DuplicateUserException();
+        }
+
+        User user = new User(name, 50000);
+        return userRepository.save(user);
     }
 
     @PostMapping("/rooms")
