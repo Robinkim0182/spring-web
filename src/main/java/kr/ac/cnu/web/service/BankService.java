@@ -2,6 +2,7 @@ package kr.ac.cnu.web.service;
 
 import kr.ac.cnu.web.model.User;
 import kr.ac.cnu.web.repository.UserRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BankService {
     @Autowired
+    @Setter
     private UserRepository userRepository;
 
-    public void transferMoney(String fromUserName, String toUserName, long money) {
+    public User transferMoney(String fromUserName, String toUserName, long money) {
         User from = userRepository.findById(fromUserName).get();
         User to = userRepository.findById(toUserName).get();
 
@@ -23,5 +25,7 @@ public class BankService {
 
         to.setAccount(to.getAccount() + money);
         userRepository.save(to);
+
+        return from;
     }
 }

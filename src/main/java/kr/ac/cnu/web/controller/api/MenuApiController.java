@@ -4,6 +4,7 @@ import kr.ac.cnu.web.model.Meal;
 import kr.ac.cnu.web.model.Menu;
 import kr.ac.cnu.web.model.TodayMenu;
 import kr.ac.cnu.web.repository.MenuRepository;
+import kr.ac.cnu.web.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ import java.util.List;
 public class MenuApiController {
     @Autowired
     private MenuRepository menuRepository;
+    @Autowired
+    private MenuService menuService;
 
     @PostMapping("/api/menus")
     public Menu insetAction(@RequestBody Menu menu) {
@@ -34,26 +37,6 @@ public class MenuApiController {
 
     @GetMapping("/api/menus/{today}")
     public TodayMenu menu(@PathVariable String today) {
-        List<Menu> menuList = menuRepository.findAllByToday(today);
-        List<String> breakfastList = new ArrayList<>();
-        List<String> launchList = new ArrayList<>();
-        List<String> dinnerList = new ArrayList<>();
-        for (Menu menu : menuList) {
-            if (menu.getMeal() == Meal.BREAKFAST) {
-                breakfastList.add(menu.getMenuName());
-            } else if (menu.getMeal() == Meal.LAUNCH) {
-                launchList.add(menu.getMenuName());
-            } else if (menu.getMeal() == Meal.DINNER) {
-                dinnerList.add(menu.getMenuName());
-            }
-        }
-        TodayMenu todayMenu = new TodayMenu();
-        todayMenu.setToday(today);
-        todayMenu.setBreakfastList(breakfastList);
-        todayMenu.setLaunchList(launchList);
-        todayMenu.setDinnerList(dinnerList);
-
-        return todayMenu;
-
+        return menuService.getTodayMenu(today);
     }
 }
