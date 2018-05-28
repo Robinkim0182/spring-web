@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 /**
  * Created by rokim on 2018. 5. 25..
  */
-@Aspect
+//@Aspect
 @Slf4j
-@Component
+//@Component
 public class LogAspect {
     @Around("execution(* kr.ac.cnu.web.repository.*.* (..))")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
