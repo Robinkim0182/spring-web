@@ -1,13 +1,5 @@
 ﻿# Porject 
 
-## Group 구성
-- - -
-|  | Group 1 | Group 2 | Group 3 |
-|:----|:-----:|:----:|:----:|
-1조 | | |
-2조 | | |
-
-
 ## 방법
 1. 각 조별로 Group 을 구성해서 Robinkim0182/spring-web/homework_week3/README.md 에 업데이트 (지금! 바로!)
 1. 각 그룹장은 Robinkim0182/spring-web repository 를 clone
@@ -17,8 +9,7 @@
 3. 최종 결과물은 동작하는 Blackjack 이 완성되어야 한다.
 
 ## 조건
-1. 숙제 마감은 --일 --:--지 입니다.
-1. 1차 평가는 --일 --:-- 입니다.
+1. 숙제 마감은 6/18일 23:59 입니다.
 2. Robinkim0182/spring-web 으로 PR을 날리지 않아도 됩니다. 강사의 브랜치와는 완전히 별개로 진행합니다.
 3. 작업방법은 Issue 등록 -> branch 생성 -> 코딩 -> PR -> Merge 의 방식으로 진행합니다. (프로젝트 진행상황을 볼 수 있도록)
 4. 아래 지정된 기능과 Bug 를 수정하는 것을 목표로 합니다
