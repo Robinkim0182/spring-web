@@ -5,6 +5,7 @@
 * 한진영
 * 김현묵
 * 황동준
+* 조정진
 
 ## 방법
 1. 각 조별로 Group 을 구성해서 Robinkim0182/spring-web/homework_week3/README.md 에 업데이트 (지금! 바로!)
