@@ -429,7 +429,7 @@
 <script>
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/black-jack"
+        url: "http://localhost:9000/api/black-jack"
     }).done(function( data ) {
         console.log(data);
     });
@@ -437,7 +437,7 @@
     function action() {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/api/black-jack",
+            url: "http://localhost:9000/api/black-jack",
             data: JSON.stringify({
                 action : 'HIT'
             }),
