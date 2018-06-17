@@ -24,7 +24,17 @@ public class Hand {
     }
 
     public int getCardSum() {
-        return cardList.stream().mapToInt(card -> card.getRank()).sum();
+        int sum = 0;
+        for(int i = 0; i < cardList.size(); i++){
+            if(cardList.get(i).getRank() > 10){
+                sum += 10;
+            }
+            else {
+                sum += cardList.get(i).getRank();
+            }
+        }
+        return sum;
+//        return cardList.stream().mapToInt(card -> card.getRank()).sum();
     }
 
     public void reset() {
