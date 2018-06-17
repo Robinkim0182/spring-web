@@ -1,5 +1,9 @@
 ﻿# Porject 
 
+## 팀구성
+[1조]
+* 한진영
+
 ## 방법
 1. 각 조별로 Group 을 구성해서 Robinkim0182/spring-web/homework_week3/README.md 에 업데이트 (지금! 바로!)
 1. 각 그룹장은 Robinkim0182/spring-web repository 를 clone
